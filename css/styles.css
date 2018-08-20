@@ -1,10 +1,10 @@
-.travelInfo {
-  display: none;
-}
-
 #travelblog h2{
   cursor: pointer;
   color: #0088cc;
+}
+
+#travelblog p{
+  display: none;
 }
 
 /*.contact:hover {

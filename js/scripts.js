@@ -51,9 +51,8 @@ $(document).ready(function() {
 
     $("#travelblog p").text(newDetails.travelBlog());
 
+    $("#travelblog h2").click(function(){
+      $("#travelblog p").toggle();
+    });
   });
-  // $("#travelblog h2").toggle(function(){
-  //   $(".travelInfo").show();
-
-  // });
 });
