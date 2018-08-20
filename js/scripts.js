@@ -23,7 +23,16 @@ function Details(season, company, sights, notes) {
 }
 
 Details.prototype.travelBlog = function() {
-  return "I visted in " + this.visitedSeason + ". " + "Friends who went with me: " + this.visitedCompany + " I saw several things such as: " + this.visitedSights + " My final thoughts are: " + this.visitedNotes;
+  return this.visitedSeason + this.visitedCompany + this.visitedSights + this.visitedNotes;
+}
+
+function resetFields() {
+    $("input#new-country").val("");
+    $("input#new-city").val("");
+    $("input#new-season").val("");
+    $("input#new-company").val("");
+    $("input#new-sights").val("");
+    $("input#new-notes").val("");
 }
 
 
@@ -47,12 +56,20 @@ $(document).ready(function() {
     console.log(newDetails);
 
 
-    $("#travelblog h2").text(newPlaces.fullTravel());
+    $("#travelblog h2").append("<h2>" + newPlaces.fullTravel() + "</h2>");
 
-    $("#travelblog p").text(newDetails.travelBlog());
+    
+    $("#travelblog ul").append("<li>" + newDetails.visitedSeason + "</li>");
+    $("#travelblog ul").append("<li>" + newDetails.visitedCompany + "</li>");
+    $("#travelblog ul").append("<li>" + newDetails.visitedSights + "</li>");
+    $("#travelblog ul").append("<li>" + newDetails.visitedNotes + "</li>");
+// $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
 
     $("#travelblog h2").click(function(){
-      $("#travelblog p").toggle();
+      $("#travelblog ul").toggle();
     });
+
+  resetFields();
+
   });
 });
