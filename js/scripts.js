@@ -1,6 +1,6 @@
 // business logic
 function Travel(country, city, season, company, landmarks, notes) {
-  this.visitedCounty = country;
+  this.visitedCountry = country;
   this.visitedCity = city;
   this.visitedSeason = season;
   this.visitedCompany = company;
@@ -8,6 +8,10 @@ function Travel(country, city, season, company, landmarks, notes) {
   this.visitedNotes = notes;
 }
 console.log(Travel())
+
+Travel.prototype.location = function() {
+  return this.visitedCity + ", " + this.visitedCountry;
+}
 
 function resetFields() {
     $("input#new-country").val("");
@@ -31,10 +35,10 @@ $(document).ready(function() {
     var inputCompanyStr = $("#new-company").val();
     var inputLandmarkStr = $("#new-marks").val();
     var inputNotesStr = $("#new-notes").val();
-    var sendConstructTravel = new Travel(inputCountryStr, inputCityStr, inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
-    console.log(sendConstructTravel);
+    var newTravel = new Travel(inputCountryStr, inputCityStr, inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
+    console.log(newTravel);
 
-
+    $("#locationList ul").append("<li>" + newTravel.location() + "</li>");
 
     // $("#travelblog h2").append("<h2>" + newPlaces.fullTravel() + "</h2>");
     //
