@@ -1,30 +1,13 @@
 // business logic
-function Places(country, city, season, company, sights, notes) {
-  this.visitedCountry = country;
+function Travel(country, city, season, company, landmarks, notes) {
+  this.visitedCounty = country;
   this.visitedCity = city;
   this.visitedSeason = season;
   this.visitedCompany = company;
-  this.visitedSights = sights;
+  this.visitedLandmarks = landmarks;
   this.visitedNotes = notes;
-
 }
-
-Places.prototype.fullTravel = function() {
-  return this.visitedCity + ", " + this.visitedCountry;
-}
-
-
-function Details(season, company, sights, notes) {
-  this.visitedSeason = season;
-  this.visitedCompany = company;
-  this.visitedSights = sights;
-  this.visitedNotes = notes;
-
-}
-
-Details.prototype.travelBlog = function() {
-  return this.visitedSeason + this.visitedCompany + this.visitedSights + this.visitedNotes;
-}
+console.log(Travel())
 
 function resetFields() {
     $("input#new-country").val("");
@@ -42,34 +25,28 @@ $(document).ready(function() {
   $("form#travel").submit(function(event) {
     event.preventDefault();
 
-    var inputtedVisitedCountry = $("#new-country").val();
-    var inputtedVisitedCity = $("#new-city").val();
-    var newPlaces = new Places(inputtedVisitedCountry, inputtedVisitedCity);
-
-    var inputtedVisitedSeason = $("#new-season").val();
-    var inputtedVisitedCompany = $("#new-company").val();
-    var inputtedVisitedSights = $("#new-sights").val();
-    var inputtedVisitedNotes = $("#new-notes").val();
-    var newDetails = new Details(inputtedVisitedSeason, inputtedVisitedCompany, inputtedVisitedSights, inputtedVisitedNotes);
-
-    console.log(newPlaces);
-    console.log(newDetails);
+    var inputCountryStr = $("#new-country").val();
+    var inputCityStr = $("#new-city").val();
+    var inputSeasonStr = $("#new-season").val();
+    var inputCompanyStr = $("#new-company").val();
+    var inputLandmarkStr = $("#new-marks").val();
+    var inputNotesStr = $("#new-notes").val();
+    var sendConstructTravel = new Travel(inputCountryStr, inputCityStr, inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
+    console.log(sendConstructTravel);
 
 
-    $("#travelblog h2").append("<h2>" + newPlaces.fullTravel() + "</h2>");
 
-    
-    $("#travelblog ul").append("<li>" + newDetails.visitedSeason + "</li>");
-    $("#travelblog ul").append("<li>" + newDetails.visitedCompany + "</li>");
-    $("#travelblog ul").append("<li>" + newDetails.visitedSights + "</li>");
-    $("#travelblog ul").append("<li>" + newDetails.visitedNotes + "</li>");
+    // $("#travelblog h2").append("<h2>" + newPlaces.fullTravel() + "</h2>");
+    //
+    //
+    // $("#travelblog ul").append("<li>" + newDetails.visitedSeason + "</li>");
+    // $("#travelblog ul").append("<li>" + newDetails.visitedCompany + "</li>");
+    // $("#travelblog ul").append("<li>" + newDetails.visitedSights + "</li>");
+    // $("#travelblog ul").append("<li>" + newDetails.visitedNotes + "</li>");
 // $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
 
-    $("#travelblog h2").click(function(){
-      $("#travelblog ul").toggle();
+
     });
-
-  resetFields();
-
+    resetFields();
   });
-});
+// });
