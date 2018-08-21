@@ -13,6 +13,10 @@ Travel.prototype.location = function() {
   return this.visitedCity + ", " + this.visitedCountry;
 }
 
+Travel.prototype.entry = function() {
+  return this.visitedSeason + this.visitedCompany + this.visitedLandmarks + this.visitedNotes;
+}
+
 function resetFields() {
     $("input#new-country").val("");
     $("input#new-city").val("");
@@ -35,22 +39,19 @@ $(document).ready(function() {
     var inputCompanyStr = $("#new-company").val();
     var inputLandmarkStr = $("#new-marks").val();
     var inputNotesStr = $("#new-notes").val();
+
     var newTravel = new Travel(inputCountryStr, inputCityStr, inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
-    console.log(newTravel);
 
     $("#locationList ul").append("<li>" + newTravel.location() + "</li>");
 
-    // $("#travelblog h2").append("<h2>" + newPlaces.fullTravel() + "</h2>");
-    //
-    //
-    // $("#travelblog ul").append("<li>" + newDetails.visitedSeason + "</li>");
-    // $("#travelblog ul").append("<li>" + newDetails.visitedCompany + "</li>");
-    // $("#travelblog ul").append("<li>" + newDetails.visitedSights + "</li>");
-    // $("#travelblog ul").append("<li>" + newDetails.visitedNotes + "</li>");
-// $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
-
-
+    $("#locationList").last().click(function() {
+      $("#travelEntry").show();
+      $("#travelEntry h2").text(newTravel.location());
+      $("#visitedSeason").text(newTravel.visitedSeason);
+      $("#visitedCompany").text(newTravel.visitedCompany);
+      $("#visitedLandmarks").text(newTravel.visitedLandmarks);
+      $("#visitedNotes").text(newTravel.visitedNotes);
+      });
     });
-    resetFields();
+  resetFields();
   });
-// });

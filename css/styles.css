@@ -1,9 +1,9 @@
-#travelblog h2{
+#locationList {
   cursor: pointer;
   color: #0088cc;
 }
 
-#travelblog p{
+#travelEntry {
   display: none;
 }
 
