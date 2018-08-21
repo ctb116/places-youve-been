@@ -10,7 +10,6 @@ function Travel(season, company, landmarks, notes) {
   this.visitedLandmarks = landmarks;
   this.visitedNotes = notes;
 }
-console.log(Travel())
 
 Place.prototype.location = function() {
   return this.visitedCity + ", " + this.visitedCountry;
@@ -36,22 +35,21 @@ $(document).ready(function() {
   $("form#travel").submit(function(event) {
     event.preventDefault();
 
-    var inputCountryStr = $(this).find("input.new-country").val();
-    var inputCityStr = $(this).find("input.new-city").val();
+    var inputCountryStr = $("#new-country").val();
+    var inputCityStr = $("#new-city").val();
     var newPlace = new Place(inputCountryStr, inputCityStr);
 
 
-    var inputSeasonStr = $(this).find("input.new-season").val();
-    var inputCompanyStr = $(this).find("input.new-company").val();
-    var inputLandmarkStr = $(this).find("input.new-marks").val();
-    var inputNotesStr = $(this).find("input.new-notes").val();
-
+    var inputSeasonStr = $("input.new-season").val();
+    var inputCompanyStr = $("input.new-company").val();
+    var inputLandmarkStr = $("input.new-marks").val();
+    var inputNotesStr = $("input.new-notes").val();
     var newTravel = new Travel(inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
 
 
-    $("#locationList ul").append("<li>" + newPlace.location() + "</li>");
+    $("#locationList ul").append("<li><span class='list'>" + newPlace.location() + "</span></li>");
 
-    $("#locationList").last().click(function() {
+    $(".list").last().click(function() {
       $("#travelEntry").show();
       $("#travelEntry h2").text(newPlace.location());
       $("#visitedSeason").text(newTravel.visitedSeason);
