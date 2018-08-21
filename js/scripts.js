@@ -1,7 +1,10 @@
 // business logic
-function Travel(country, city, season, company, landmarks, notes) {
+function Place(country, city) {
   this.visitedCountry = country;
   this.visitedCity = city;
+}
+
+function Travel(season, company, landmarks, notes) {
   this.visitedSeason = season;
   this.visitedCompany = company;
   this.visitedLandmarks = landmarks;
@@ -9,7 +12,7 @@ function Travel(country, city, season, company, landmarks, notes) {
 }
 console.log(Travel())
 
-Travel.prototype.location = function() {
+Place.prototype.location = function() {
   return this.visitedCity + ", " + this.visitedCountry;
 }
 
@@ -22,7 +25,7 @@ function resetFields() {
     $("input#new-city").val("");
     $("input#new-season").val("");
     $("input#new-company").val("");
-    $("input#new-sights").val("");
+    $("input#new-marks").val("");
     $("input#new-notes").val("");
 }
 
@@ -33,25 +36,30 @@ $(document).ready(function() {
   $("form#travel").submit(function(event) {
     event.preventDefault();
 
-    var inputCountryStr = $("#new-country").val();
-    var inputCityStr = $("#new-city").val();
-    var inputSeasonStr = $("#new-season").val();
-    var inputCompanyStr = $("#new-company").val();
-    var inputLandmarkStr = $("#new-marks").val();
-    var inputNotesStr = $("#new-notes").val();
+    var inputCountryStr = $(this).find("input.new-country").val();
+    var inputCityStr = $(this).find("input.new-city").val();
+    var newPlace = new Place(inputCountryStr, inputCityStr);
 
-    var newTravel = new Travel(inputCountryStr, inputCityStr, inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
 
-    $("#locationList ul").append("<li>" + newTravel.location() + "</li>");
+    var inputSeasonStr = $(this).find("input.new-season").val();
+    var inputCompanyStr = $(this).find("input.new-company").val();
+    var inputLandmarkStr = $(this).find("input.new-marks").val();
+    var inputNotesStr = $(this).find("input.new-notes").val();
+
+    var newTravel = new Travel(inputSeasonStr, inputCompanyStr, inputLandmarkStr, inputNotesStr);
+
+
+    $("#locationList ul").append("<li>" + newPlace.location() + "</li>");
 
     $("#locationList").last().click(function() {
       $("#travelEntry").show();
-      $("#travelEntry h2").text(newTravel.location());
+      $("#travelEntry h2").text(newPlace.location());
       $("#visitedSeason").text(newTravel.visitedSeason);
       $("#visitedCompany").text(newTravel.visitedCompany);
       $("#visitedLandmarks").text(newTravel.visitedLandmarks);
       $("#visitedNotes").text(newTravel.visitedNotes);
-      });
+  });
+
+    resetFields();
     });
-  resetFields();
   });
